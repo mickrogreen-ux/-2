@@ -1,0 +1,613 @@
+/* ==========================================================================
+   1. СКИДАННЯ СТИЛІВ ТА БАЗОВІ НАЛАШТУВАННЯ
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #ffffff;
+    color: #333333;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+/* ==========================================================================
+   2. ШАПКА САЙТУ (HEADER)
+/* ==========================================================================
+   2. ШАПКА САЙТУ (ОНОВЛЕНА ТЕМНА ВЕРСІЯ)
+   ========================================================================== */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4%;
+    background-color: #111111; /* Темне преміальне тло замість білого */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.logo img {
+    height: 60px; /* Трохи збільшуємо, щоб напис читався */
+    width: auto;
+    display: block;
+    object-fit: contain;
+}
+
+.main-nav {
+    display: flex;
+    gap: 30px;
+}
+
+.main-nav a {
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #ffffff; /* Білі посилання */
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.main-nav a:hover {
+    color: #d4af37; /* Елегантний золотий колір при наведенні */
+}
+
+.main-nav i {
+    font-size: 10px;
+}
+
+.lang-switcher {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.lang-link {
+    color: #666666; /* Неактивна мова стає тьмянішою */
+    transition: color 0.3s;
+    padding: 0 5px;
+}
+
+.lang-link.active, .lang-link:hover {
+    color: #ffffff; /* Активна мова — біла */
+}
+
+.lang-separator {
+    color: #333333;
+}
+
+
+/* ==========================================================================
+   3. СЕКЦІЯ 1: ГЕРОЙ-БЛОК (ПОЛНОЭКРАННЫЙ ЭФФЕКТ)
+   ========================================================================== */
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    padding-top: 80px;
+    overflow: hidden;
+    background-color: #111111;
+}
+
+.bg-photo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.bg-photo.active-bg {
+    opacity: 1;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 2;
+}
+
+.hero-links-container {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+}
+
+.hero-link-zone {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 12vh;
+    cursor: pointer;
+    transition: opacity 0.4s ease;
+}
+
+.card-content {
+    text-align: center;
+    color: #ffffff;
+    transition: transform 0.4s ease;
+}
+
+.card-content h2 {
+    font-size: 34px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.card-content p {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+/* ЭФФЕКТ ХОВЕРА ДЛЯ ПК */
+@media (min-width: 769px) {
+    .hero-link-zone:hover .card-content {
+        transform: scale(1.1);
+    }
+
+    /* Когда наводим на одно слово, другие два блекнут на 35%, но остаются видны */
+    .hero-links-container:hover .hero-link-zone:not(:hover) {
+        opacity: 0.35; 
+    }
+}
+
+/* МОБИЛЬНЫЙ АДАПТИВ (Картинки ложатся полосами под каждое слово) */
+@media (max-width: 768px) {
+    .hero-links-container {
+        flex-direction: column;
+    }
+    .hero-link-zone {
+        width: 100%;
+        height: 33.33%;
+        align-items: center;
+        padding-bottom: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .bg-photo, .hero-overlay {
+        display: none;
+    }
+    .hero-link-zone:nth-child(1) { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('2.png'); background-size: cover; background-position: center; }
+    .hero-link-zone:nth-child(2) { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('4.png'); background-size: cover; background-position: center; }
+    .hero-link-zone:nth-child(3) { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('1.png'); background-size: cover; background-position: center; }
+}
+
+
+
+/* ==========================================================================
+   4. СЕКЦІЯ 2: ПОРТФОЛІО (СТИЛІЗАЦІЯ ПІД МАКЕТ)
+   ========================================================================== */
+.portfolio-section {
+    padding: 100px 4%;
+    background-color: #ffffff;
+}
+
+.portfolio-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.portfolio-header h2 {
+    font-size: 36px;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+.slider-controls {
+    display: flex;
+    gap: 15px;
+}
+
+.control-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 1px solid #cccccc;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #333333;
+    transition: all 0.3s ease;
+}
+
+.control-btn:hover {
+    border-color: #000000;
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.slider-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.slider-track {
+    display: flex;
+    gap: 30px;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); /* Плавний перехід */
+}
+
+.portfolio-item {
+    flex: 0 0 calc(33.333% - 20px); /* 3 картки на екрані */
+    min-width: 300px;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    height: 450px;
+}
+
+.portfolio-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Градієнтне затемнення знизу картки, як на фото */
+.item-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 40px 20px 20px 20px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0) 100%);
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.item-meta {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.4;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.item-location {
+    font-size: 12px;
+    color: #d4af37; /* Твій фірмовий золотистий відтінок для локації */
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* ==========================================================================
+   5. СЕКЦІЯ 3: КОНТАКТИ ТА КАРТА
+   ========================================================================== */
+.contacts-section {
+    padding-top: 80px;
+    background-color: #ffffff;
+}
+
+.contacts-container {
+    padding: 0 4% 60px 4%;
+}
+
+.contacts-container h2 {
+    font-size: 36px;
+    font-weight: 400;
+    margin-bottom: 50px;
+    letter-spacing: 1px;
+}
+
+.contacts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+}
+
+.contact-block {
+    display: flex;
+    gap: 20px;
+}
+
+.contact-icon {
+    font-size: 20px;
+    color: #d4af37;
+    padding-top: 3px;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.contact-info .label {
+    font-size: 12px;
+    color: #aaaaaa;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.contact-info .value {
+    font-size: 16px;
+    color: #111111;
+    font-weight: 400;
+}
+
+.contact-info a.value:hover {
+    color: #d4af37;
+}
+
+.center-block {
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.center-block .info-group {
+    display: flex;
+    gap: 20px;
+}
+
+.cta-button {
+    width: 100%;
+    max-width: 240px;
+    height: 50px;
+    border: 1px solid #000000;
+    background: transparent;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.cta-button:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.networks-address {
+    flex-direction: column;
+    gap: 30px;
+}
+
+.networks-address .info-group {
+    display: flex;
+    gap: 20px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 5px;
+}
+
+.social-icons a {
+    font-size: 16px;
+    color: #000000;
+    transition: color 0.3s;
+}
+
+.social-icons a:hover {
+    color: #d4af37;
+}
+
+/* ==========================================================================
+   ОНОВЛЕНІ СТИЛІ ІНТЕГРАЦІЇ КАРТИ (БЕЗ ЖОРСТКИХ ФІЛЬТРІВ)
+   ========================================================================== */
+.map-wrapper {
+    position: relative;
+    width: 100%;
+    height: 450px; /* Оптимальна висота як на першому фото */
+    overflow: hidden;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* М'який білий серпанок (градієнтний перехід сайту в карту) */
+.map-wrapper::before,
+.map-wrapper::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 75px;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.map-wrapper::before {
+    top: 0;
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+}
+
+.map-wrapper::after {
+    bottom: 0;
+    background: linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+}
+
+/* Кастомний круглий маркер з першого фото (жовтий з обводкою та тінню) */
+.custom-marker {
+    background-color: #FFC72C;
+    border: 3px solid #444444;
+    border-radius: 50%;
+    box-shadow: 0 0 0 6px rgba(255, 199, 44, 0.2), 0 2px 4px rgba(0,0,0,0.15);
+}
+
+/* ==========================================================================
+   6. АДАПТИВНІСТЬ (МОБІЛЬНА ВЕРСІЯ)
+   ========================================================================== */
+@media (max-width: 992px) {
+    .contacts-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    .center-block {
+        gap: 20px;
+    }
+    .portfolio-item {
+        flex: 0 0 calc(50% - 15px);
+    }
+}
+
+/* ==========================================================================
+   Стилі для інтеграції карти (Кишинів)
+   ========================================================================== */
+
+.map-wrapper {
+    position: relative;
+    width: 100%;
+    height: 450px; /* Висота як на оригінальному фото */
+    overflow: hidden;
+    background-color: #f5f5f5;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* Ефект плавного згасання карти в білий колір сайту (зверху і знизу) */
+.map-wrapper::before,
+.map-wrapper::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    z-index: 10;
+    pointer-events: none; /* Щоб карта реагувала на мишку під градієнтом */
+}
+
+.map-wrapper::before {
+    top: 0;
+    background: linear-gradient(to bottom, rgba(252,252,252,1) 0%, rgba(252,252,252,0) 100%);
+}
+
+.map-wrapper::after {
+    bottom: 0;
+    background: linear-gradient(to top, rgba(252,252,252,1) 0%, rgba(252,252,252,0) 100%);
+}
+
+/* Кастомний маркер як на фото: жовтий круг з темною рамкою */
+.custom-marker {
+    background-color: #ffcc00;
+    border: 2px solid #3d3d3d;
+    border-radius: 50%;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+}
+/* ==========================================================================
+   КНОПКА БУРГЕРА ТА МОБІЛЬНЕ МЕНЮ
+   ========================================================================== */
+
+/* На десктопі кнопка прихована */
+.burger-menu-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1100;
+    padding: 0;
+}
+
+.burger-menu-btn span {
+    width: 100%;
+    height: 2px;
+    background-color: #ffffff;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Адаптив для екранів <= 768px */
+@media (max-width: 768px) {
+    .burger-menu-btn {
+        display: flex; /* Показуємо бургер */
+    }
+
+    /* Анімація перетворення бургера на хрестик при активації */
+    .burger-menu-btn.active span:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+        background-color: #d4af37;
+    }
+    .burger-menu-btn.active span:nth-child(2) {
+        opacity: 0;
+    }
+    .burger-menu-btn.active span:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+        background-color: #d4af37;
+    }
+
+    /* Перетворюємо навігацію на повноекранне мобільне меню */
+    .site-header .main-nav {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Спочатку заховане праворуч */
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(17, 17, 17, 0.98); /* Темне преміум тло */
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        z-index: 1050;
+    }
+
+    /* Коли меню відкрите */
+    .site-header .main-nav.active {
+        right: 0;
+    }
+
+    .site-header .main-nav a {
+        font-size: 20px; /* Збільшуємо шрифт для зручності на телефоні */
+    }
+
+    /* Заборона скролу сайту, коли меню відкрите */
+    body.no-scroll {
+        overflow: hidden;
+    }
+}

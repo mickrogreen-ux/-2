@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ремонт и дизайн под ключ</title>
+    
+    <!-- Підключення стилів Leaflet карти (Обов'язково тут!) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- Підключення зовнішнього файлу стилів сайту -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Підключення іконок FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="site-header">
+    <div class="logo">
+        <img src="logo.png" alt="">
+    </div>
+
+    <button class="burger-menu-btn" aria-label="Открыть меню">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <nav class="main-nav">
+        <a href="#process">Процесс <i class="fa-solid fa-chevron-down"></i></a>
+        <a href="#portfolio">Портфолио</a>
+        <a href="#contacts">Контакти</a>
+    </nav>
+    <div class="lang-switcher">
+        <a href="/ro/" class="lang-link">RO</a>
+        <span class="lang-separator">|</span>
+        <a href="/ru/" class="lang-link active">RU</a>
+    </div>
+</header>
+
+ <!-- СЕКЦІЯ 1: ГЕРОЙ-БЛОК -->
+<section class="hero-section">
+    <!-- ФОНОВЫЕ КАРТИНКИ (Управляются через CSS и JS) -->
+    <img src="1.png" alt="Stroykartel Коллаж" class="bg-photo main-collage-bg active-bg">
+    <img src="2.png" alt="Ремонт" class="bg-photo remont-bg">
+    <img src="4.png" alt="Инженерные системы" class="bg-photo engineering-bg">
+    <!-- Для дизайна используем картинку 1.png в качестве полноэкранного фона при наведении -->
+    <img src="1.png" alt="Дизайн" class="bg-photo design-bg">
+
+    <!-- ТЕМНЫЙ ФИЛЬТР ДЛЯ ЧИТАЕМОСТИ ТЕКСТА -->
+    <div class="hero-overlay"></div>
+
+    <!-- КОНТЕЙНЕР ДЛЯ ЗОН НАВЕДЕНИЯ И СЛОВ -->
+    <div class="hero-links-container">
+        
+        <!-- Слово 1: Ремонт -->
+        <a href="remont.html" class="hero-link-zone" data-bg="remont-bg">
+            <div class="card-content">
+                <h2>Ремонт</h2>
+                <p>КАЧЕСТВЕННАЯ ОТДЕЛКА</p>
+            </div>
+        </a>
+
+        <!-- Слово 2: Инженерные системы -->
+        <a href="engineering.html" class="hero-link-zone" data-bg="engineering-bg">
+            <div class="card-content">
+                <h2>Инженерные системы</h2>
+                <p>НАДЕЖНЫЕ КОММУНИКАЦИИ</p>
+            </div>
+        </a>
+
+        <!-- Слово 3: Дизайн -->
+        <a href="design.html" class="hero-link-zone" data-bg="design-bg">
+            <div class="card-content">
+                <h2>Дизайн</h2>
+                <p>СОВРЕМЕННЫЙ ИНТЕРЬЕР</p>
+            </div>
+        </a>
+
+    </div>
+</section>
+
+<!-- СЕКЦІЯ 2: ПОРТФОЛИО -->
+<section id="portfolio" class="portfolio-section">
+    <div class="portfolio-header">
+        <h2>Портфолио</h2>
+        <div class="slider-controls">
+            <button id="prevBtn" class="control-btn"><i class="fa-solid fa-arrow-left"></i></button>
+            <button id="nextBtn" class="control-btn"><i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </div>
+    
+    <div class="slider-container">
+        <div class="slider-track">
+            <!-- Картка 1 -->
+            <div class="portfolio-item">
+                <img src="картинка нашы роботи .png" alt="Минималистичная квартира">
+                <div class="item-overlay">
+                    <div class="item-meta">Современный интерьер — Минималистичная квартира</div>
+                    <div class="item-location"><i class="fa-solid fa-location-dot"></i> Кишинёв</div>
+                </div>
+            </div>
+            <!-- Картка 2 -->
+            <div class="portfolio-item">
+                <img src="картинка нашы роботи 2 .png" alt="Дом в Будештах">
+                <div class="item-overlay">
+                    <div class="item-meta">Современный interior — Дом в Будештах</div>
+                    <div class="item-location"><i class="fa-solid fa-location-dot"></i> Кишинёв</div>
+                </div>
+            </div>
+            <!-- Картка 3 -->
+            <div class="portfolio-item">
+                <img src="картинка нашы роботи 3 .png" alt="Дизайн экстерьера частного дома">
+                <div class="item-overlay">
+                    <div class="item-meta">Современный дизайн экстерьера частного дома в Кишинёве</div>
+                    <div class="item-location"><i class="fa-solid fa-location-dot"></i> Кишинёв</div>
+                </div>
+            </div>
+            <!-- Картка 4 -->
+            <div class="portfolio-item">
+                <img src="картинка нашы роботи 4 .png" alt="Современная гостиная">
+                <div class="item-overlay">
+                    <div class="item-meta">Современный interior — Уютная гостиная</div>
+                    <div class="item-location"><i class="fa-solid fa-location-dot"></i> Кишинёв</div>
+                </div>
+            </div>
+            <!-- Картка 5 -->
+            <div class="portfolio-item">
+                <img src="картинка квартир 5.png" alt="Стильная спальня">
+                <div class="item-overlay">
+                    <div class="item-meta">Современный дизайн — Элегантная спальня</div>
+                    <div class="item-location"><i class="fa-solid fa-location-dot"></i> Кишинёв</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- СЕКЦІЯ 3: КОНТАКТИ ТА КАРТА -->
+    <section id="contacts" class="contacts-section">
+        <div class="contacts-container">
+            <h2>Контакты</h2>
+            
+            <div class="contacts-grid">
+                <div class="contact-block">
+                    <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+                    <div class="contact-info">
+                        <span class="label">Телефон</span>
+                        <a href="tel:+37379899577" class="value">+380677049755</a>
+                        <a href="tel:+37379899577" class="value">+380677049755</a>
+                    </div>
+                </div>
+
+                <div class="contact-block center-block">
+                    <div class="info-group">
+                        <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                        <div class="contact-info">
+                            <span class="label">Почта</span>
+                            <a href="mailto:ezor.md@gmail.com" class="value">stroykartel@gmail.com</a>
+                        </div>
+                    </div>
+                    <button class="cta-button">СВЯЗАТЬСЯ С НАМИ</button>
+                </div>
+
+                <div class="contact-block networks-address">
+                    <div class="info-group">
+                        <div class="contact-icon"><i class="fa-solid fa-globe"></i></div>
+                        <div class="contact-info">
+                            <span class="label">Социальные сети</span>
+                            <div class="social-icons">
+                                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-group address-group">
+                        <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+                        <div class="contact-info">
+                            <span class="label">Адрес</span>
+                            <span class="value">Улица Михая Эминеску 74, MD-2012, Кишинёв</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+  <div class="map-wrapper">
+            <div id="map"></div>
+        </div>
+    </section>
+
+    <!-- Скрипт карти Leaflet (повинен йти перед вашим скриптом) -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Підключення вашого файлу скриптів -->
+    <script src="script.js"></script>
+</body>
+</html>
