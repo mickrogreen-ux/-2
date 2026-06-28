@@ -314,118 +314,141 @@ ul {
 }
 
 /* ==========================================================================
-   5. СЕКЦІЯ 3: КОНТАКТИ ТА КАРТА
+   5. СЕКЦІЯ 3: КОНТАКТИ ТА КАРТА (АДАПТИВ ТА ВІДСТУПИ)
    ========================================================================== */
 .contacts-section {
     padding-top: 80px;
     background-color: #ffffff;
 }
 
+/* Обмежуємо ширину на десктопі, щоб текст не притискався до країв екрана */
 .contacts-container {
-    padding: 0 4% 60px 4%;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 0 40px 60px 40px !important;
 }
 
 .contacts-container h2 {
     font-size: 36px;
     font-weight: 400;
-    margin-bottom: 50px;
+    margin-bottom: 30px !important; /* Трохи зменшили стандартний відступ заголовка */
     letter-spacing: 1px;
 }
 
+/* СІТКА: Сама опускається нижче завдяки margin-top */
 .contacts-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 40px;
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important; /* 4 колонки на ПК */
+    gap: 40px !important;
+    align-items: flex-start !important;
+    margin-top: 100px !important; /* ОПУСКАЄМО ТЕКСТ ТА ІКОНКИ НИЖЧЕ НА ПК */
+    margin-bottom: 40px !important;
 }
 
-.contact-block {
-    display: flex;
-    gap: 20px;
+/* Картка */
+.contact-card {
+    display: flex !important;
+    gap: 15px !important;
+    align-items: flex-start !important;
 }
 
 .contact-icon {
-    font-size: 20px;
+    font-size: 18px;
     color: #d4af37;
-    padding-top: 3px;
+    width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+    padding-top: 2px;
 }
 
-.contact-info {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+.contact-content {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
 }
 
-.contact-info .label {
-    font-size: 12px;
+.contact-content .label {
+    font-size: 11px;
     color: #aaaaaa;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
 }
 
-.contact-info .value {
-    font-size: 16px;
+.contact-content .value {
+    font-size: 14px;
     color: #111111;
     font-weight: 400;
+    line-height: 1.4;
 }
 
-.contact-info a.value:hover {
+.contact-content a.value:hover {
     color: #d4af37;
 }
 
-.center-block {
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 30px;
-}
-
-.center-block .info-group {
-    display: flex;
-    gap: 20px;
-}
-
-.cta-button {
-    width: 100%;
-    max-width: 240px;
-    height: 50px;
-    border: 1px solid #000000;
-    background: transparent;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 10px;
-}
-
-.cta-button:hover {
-    background-color: #000000;
-    color: #ffffff;
-}
-
-.networks-address {
-    flex-direction: column;
-    gap: 30px;
-}
-
-.networks-address .info-group {
-    display: flex;
-    gap: 20px;
-}
-
+/* Соцмережі */
 .social-icons {
-    display: flex;
-    gap: 15px;
-    margin-top: 5px;
+    display: flex !important;
+    gap: 18px !important;
+    margin-top: 4px;
 }
 
 .social-icons a {
-    font-size: 16px;
-    color: #000000;
-    transition: color 0.3s;
+    font-size: 18px;
+    color: #111111;
 }
 
-.social-icons a:hover {
-    color: #d4af37;
+/* ОБГОРТКА ДЛЯ КНОПКИ */
+.cta-button-wrapper {
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
+}
+
+/* КНОПКА (ЗАЛИШАЄТЬСЯ НА СВОЄМУ МІСЦІ) */
+.cta-button {
+    width: 100% !important;
+    max-width: 280px !important;
+    height: 52px !important;
+    border: 1px solid #111111 !important;
+    background: transparent !important;
+    color: #111111 !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    letter-spacing: 2px !important;
+    cursor: pointer;
+}
+
+.cta-button:hover {
+    background-color: #111111 !important;
+    color: #ffffff !important;
+}
+
+
+/* ==========================================================================
+   АДАПТИВНІСТЬ ДЛЯ МОБІЛЬНИХ ПРИСТРОЇВ (ПОВНЕ ВІДНОВЛЕННЯ)
+   ========================================================================== */
+
+@media (max-width: 992px) {
+    .contacts-grid {
+        grid-template-columns: repeat(2, 1fr) !important; /* 2х2 на планшетах */
+        margin-top: 50px !important; /* Зменшуємо відступ на планшетах */
+    }
+}
+
+@media (max-width: 768px) {
+    .contacts-container {
+        padding: 0 20px 40px 20px !important; /* Менші бокові поля на телефонах */
+    }
+    
+    .contacts-grid {
+        grid-template-columns: 1fr !important; /* СТРОГО В ОДНУ КОЛОНКУ НА МОБІЛЦІ */
+        gap: 30px !important;
+        margin-top: 40px !important; /* Мінімальний акуратний відступ для мобілки */
+    }
+    
+    .cta-button {
+        max-width: 100% !important; /* Кнопка стає на всю ширину екрана */
+    }
 }
 
 /* ==========================================================================
@@ -473,22 +496,20 @@ ul {
     border-radius: 50%;
     box-shadow: 0 0 0 6px rgba(255, 199, 44, 0.2), 0 2px 4px rgba(0,0,0,0.15);
 }
-
 /* ==========================================================================
-   6. АДАПТИВНІСТЬ (МОБІЛЬНА ВЕРСІЯ)
+   6. АДАПТИВНІСТЬ (ІНШІ ЕЛЕМЕНТИ)
    ========================================================================== */
 @media (max-width: 992px) {
-    .contacts-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-    .center-block {
-        gap: 20px;
-    }
+    /* Зберігаємо налаштування для твого портфоліо */
     .portfolio-item {
         flex: 0 0 calc(50% - 15px);
     }
+    
+    /* Усі старі контакти звідси видалили, бо вони тепер 
+       красиво й окремо прописані в Розділі 5 */
 }
+
+
 
 /* ==========================================================================
    Стилі для інтеграції карти (Кишинів)
@@ -609,5 +630,17 @@ ul {
     /* Заборона скролу сайту, коли меню відкрите */
     body.no-scroll {
         overflow: hidden;
+    }
+}
+@media (max-width: 768px) {
+    /* Зменшуємо бокові відступи самої шапки, щоб звільнити місце */
+    header, .header-container {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+
+    /* Додаємо невеликий відступ для блоку мов, щоб він відійшов від краю */
+    .lang-switcher, .lang-select, .header-right { 
+        margin-right: 5px !important;
     }
 }
