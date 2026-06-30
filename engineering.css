@@ -1,0 +1,689 @@
+/* --- 1. БАЗОВІ СКИДАННЯ ТА ШРИФТИ --- */
+html {
+    scroll-behavior: smooth !important;
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    padding: 120px 20px 60px 20px; /* Збільшено верхній паддінг з 60px до 120px, щоб контент не ховався під шапку */
+    display: flex;
+    flex-direction: column; /* Змушує секції йти строго одна під одну (поверхами) */
+    align-items: center;    /* Центрує обидві секції по ширині екрану */
+}
+
+/* ==========================================================================
+   ІНТЕГРАЦІЯ: СТИЛІ ШАПКИ САЙТУ (HEADER) ТА МЕНЮ ДЛЯ СТОРІНКИ РЕМОНТУ
+   ========================================================================== */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4%;
+    background-color: #111111;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.logo img {
+    height: 60px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+}
+
+.main-nav {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.main-nav a {
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.main-nav a:hover, .dropdown.active .dropdown-toggle {
+    color: #ffb703; /* Використовуємо твій колір акценту зі сторінки ремонту */
+}
+
+.lang-switcher {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.lang-link {
+    color: #666666;
+    text-decoration: none;
+    transition: color 0.3s;
+    padding: 0 5px;
+}
+
+.lang-link.active, .lang-link:hover {
+    color: #ffffff;
+}
+
+.lang-separator {
+    color: #333333;
+}
+
+/* СТИЛІ DROPDOWN МЕНЮ */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background-color: #111111;
+    min-width: 220px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    border-radius: 4px;
+    padding: 10px 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1100;
+    list-style: none;
+}
+
+.dropdown-menu li {
+    width: 100%;
+}
+
+.dropdown-menu a {
+    display: block !important;
+    padding: 12px 20px !important;
+    color: #ffffff !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: background-color 0.3s, color 0.3s;
+    white-space: nowrap;
+}
+
+.dropdown-menu a:hover {
+    background-color: #1a1a1a;
+    color: #ffb703 !important;
+}
+
+@media (min-width: 769px) {
+    .dropdown:hover .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* БУРГЕР КНОПКА */
+.burger-menu-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1100;
+    padding: 0;
+}
+
+.burger-menu-btn span {
+    width: 100%;
+    height: 2px;
+    background-color: #ffffff;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Адаптивність шапки для мобільних пристроїв */
+@media (max-width: 768px) {
+    .burger-menu-btn { display: flex; }
+
+    .burger-menu-btn.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); background-color: #ffb703; }
+    .burger-menu-btn.active span:nth-child(2) { opacity: 0; }
+    .burger-menu-btn.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); background-color: #ffb703; }
+
+    .site-header .main-nav {
+        position: fixed;
+        top: 0; right: -100%; width: 100%; height: 100vh;
+        background-color: rgba(17, 17, 17, 0.98);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        z-index: 1050;
+        padding: 20px;
+    }
+
+    .site-header .main-nav.active { right: 0; }
+    .site-header .main-nav a { font-size: 20px; }
+
+    .dropdown { width: 100%; text-align: center; }
+    .dropdown-menu {
+        position: static; transform: none; box-shadow: none;
+        background-color: transparent; opacity: 1; visibility: visible;
+        display: none; padding: 10px 0 0 0; width: 100%;
+    }
+    .dropdown-menu.active { display: block; }
+    .dropdown-menu a { font-size: 16px !important; padding: 10px 0 !important; color: #aaaaaa !important; text-align: center;}
+    .dropdown.active .fa-chevron-down { transform: rotate(180deg); transition: transform 0.3s ease; }
+    body.no-scroll { overflow: hidden; }
+}
+
+/* --- ПОВНІСТЮ ОНОВЛЕНІ СТИЛІ ДЛЯ СЕКЦІЇ КАЛЬКУЛЯТОРА --- */
+.calc-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 5%;
+    width: 100%;
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.calc-container {
+    flex: 1;
+    max-width: 60%;
+    font-family: 'Arial', sans-serif;
+}
+
+.image-box {
+    flex: 1;
+    max-width: 40%;
+}
+
+.image-box img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+/* Заголовки */
+.calc-title {
+    font-size: 32px;
+    color: #1a2b3c;
+    font-weight: bold;
+    margin: 0 0 15px 0;
+    line-height: 1.2;
+}
+
+.calc-subtitle {
+    font-size: 14px;
+    color: #9e9e9e;
+    line-height: 1.5;
+    margin-bottom: 30px;
+    max-width: 500px;
+}
+
+/* Елементи форми */
+.calc-form {
+    max-width: 450px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-label {
+    display: block;
+    font-size: 11px;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+/* Інпути та селекти */
+.calc-form input[type="text"],
+.calc-form input[type="number"],
+.calc-form input[type="tel"],
+.calc-form select {
+    width: 100%;
+    height: 48px;
+    background-color: #f1f3f5;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    padding: 0 15px;
+    font-size: 14px;
+    color: #333333;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.calc-form input::placeholder {
+    color: #b0b8c1;
+}
+
+/* Випадаючий список */
+.select-wrapper {
+    position: relative;
+}
+
+.select-wrapper select {
+    appearance: none;
+    cursor: pointer;
+    padding-right: 40px;
+}
+
+.select-wrapper::after {
+    content: '\f078';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 12px;
+    color: #4a5568;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+/* Кастомний повзунок (Range Slider) */
+.range-container {
+    margin-top: 10px;
+    position: relative;
+}
+
+.range-container input[type="range"] {
+    appearance: none;
+    width: 100%;
+    height: 3px;
+    background: #e2e8f0;
+    border-radius: 2px;
+    outline: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Повзунок для сучасних браузерів */
+.range-container input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #ffa500;
+    cursor: pointer;
+    border: none;
+}
+
+/* Повзунок для Firefox */
+.range-container input[type="range"]::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #ffa500;
+    cursor: pointer;
+    border: none;
+}
+
+.range-limits {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #718096;
+    margin-top: 6px;
+}
+
+/* Кнопка ОТПРАВИТЬ */
+.calc-form .btn-submit {
+    width: 100%;
+    height: 50px;
+    background-color: transparent;
+    border: 1px solid #000000;
+    color: #000000;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border-radius: 0;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+}
+
+.calc-form .btn-submit:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+/* Адаптивність для мобільних пристроїв */
+@media (max-width: 768px) {
+    .calc-section {
+        flex-direction: column;
+    }
+    .calc-container, .image-box {
+        max-width: 100%;
+    }
+    .calc-container {
+        margin-bottom: 40px;
+    }
+}
+
+
+/* --- СЕКЦІЯ 2: НАШІ РОБОТИ (З СІТКОЮ НА 5 КАРТОК) --- */
+.works-section {
+    clear: both;
+    display: block;
+    max-width: 1200px;
+    width: 100%;
+    margin: 100px auto 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.works-title {
+    font-size: 32px;
+    color: #101d33;
+    font-weight: 700;
+    margin-bottom: 60px;
+    text-align: left;
+}
+
+.works-grid {
+    display: flex;
+    flex-wrap: wrap;          /* Дозволяє карткам переноситися нижче */
+    justify-content: space-between;
+    align-items: flex-start;  
+    gap: 70px 0;              /* 70px відступ між рядками, бічний регулюється через width */
+    width: 100%;
+}
+
+.work-card {
+    width: calc(50% - 35px);  /* Задає фіксований розмір для двох колонок */
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+/* ЛІВІ КАРТКИ (1, 3, 5) — стоять рівно */
+.card-left {
+    margin-top: 0;
+}
+
+/* ПРАВІ КАРТКИ (2, 4) — зміщені вниз на 160px */
+.card-right {
+    margin-top: 160px;        /* Той самий каскадний спуск для правих колонок */
+}
+
+/* Обгортка фото */
+.work-img-box {
+    width: 100%;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.work-img-box img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+}
+
+/* Текст під фото */
+.work-info h3 {
+    font-size: 16px;
+    color: #101d33;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 14px;
+}
+
+.work-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: #8c939d;
+}
+
+.meta-icon {
+    font-size: 14px;
+    color: #ffb703;
+}
+
+/* АДАПТИВНІСТЬ (ДЛЯ МОБІЛОК — в один стовпчик) */
+@media (max-width: 850px) {
+    .calc-section {
+        flex-direction: column;
+        gap: 40px;
+    }
+    .image-box img {
+        min-height: 350px;
+    }
+    .works-grid {
+        flex-direction: column;
+        gap: 40px;
+    }
+    .work-card {
+        width: 100%; /* На мобілках картки стають на всю ширину */
+    }
+    .card-right {
+        margin-top: 0; /* Прибираємо зміщення на смартфонах */
+    }
+}
+
+/* --- СЕКЦІЯ 3: КОНТАКТИ --- *//* ==========================================================================
+   5. СЕКЦИЯ КОНТАКТОВ И КАРТЫ
+   ========================================================================== */
+.contacts-section {
+    padding: 80px 4% 0 4%;
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.contacts-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.contacts-container h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #111111;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Сетка выстраивает 4 колонки строго в один ряд */
+.contacts-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 равные колонки */
+    gap: 30px;
+    margin-bottom: 60px;
+    align-items: start;
+}
+
+/* Карточка контакта */
+.contact-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+/* Золотые иконки из файла "Без имени.png2.png" */
+.contact-icon {
+    font-size: 20px;
+    color: #d4af37; /* Красивый золотой цвет */
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.contact-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Серые подписи капсом */
+.contact-content .label {
+    font-size: 11px;
+    color: #999999;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.contact-content .value {
+    font-size: 15px;
+    color: #111111;
+    text-decoration: none;
+    font-weight: 500;
+    line-height: 1.4;
+    transition: color 0.2s ease;
+}
+
+.contact-content a.value:hover {
+    color: #d4af37;
+}
+
+/* Блок иконок соцсетей */
+.social-icons {
+    display: flex;
+    gap: 18px;
+    margin-top: 4px;
+    align-items: center;
+}
+
+.social-icons a {
+    color: #111111;
+    font-size: 20px; /* Увеличенный размер для аккуратного клика */
+    text-decoration: none;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.social-icons a:hover {
+    color: #d4af37;
+    transform: translateY(-2px);
+}
+
+/* КНОПКА СВЯЗАТЬСЯ С НАМИ */
+.cta-button-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 60px;
+}
+
+.cta-button {
+    background: #111111;
+    color: #ffffff;
+    border: 1px solid #111111;
+    padding: 14px 40px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #d4af37;
+    border-color: #d4af37;
+    color: #ffffff;
+}
+
+/* БЛОК КАРТЫ */
+.map-wrapper {
+    position: relative;
+    width: auto;
+    margin-left: -4.2%; 
+    margin-right: -4.2%;
+    height: 500px;
+    overflow: hidden;
+    margin-top: 40px;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+}
+
+.map-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.custom-marker {
+    background: #d4af37 !important;
+    border: 3px solid #ffffff !important;
+    border-radius: 50% !important;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.7) !important;
+}
+
+/* Адаптивность для мобильных экранов */
+@media (max-width: 992px) {
+    .contacts-grid {
+        grid-template-columns: repeat(2, 1fr); /* На планшетах 2х2 */
+        gap: 40px;
+    }
+}
+
+@media (max-width: 576px) {
+    .contacts-grid {
+        grid-template-columns: 1fr; /* На мобильных строго в один вертикальный ряд */
+        gap: 30px;
+    }
+}
+/* ==========================================================================
+   УНІВЕРСАЛЬНИЙ ФІКС МОВ (ПРАЦЮЄ НАВІТЬ БЕЗ КЛАСІВ ТА ПРИБИРАЄ ФІОЛЕТОВИЙ)
+   ========================================================================== */
+.lang-switcher a,
+.lang-switcher a:link,
+.lang-switcher a:visited {
+    color: #aaaaaa !important; /* Неактивна мова — завжди світло-сіра */
+    text-decoration: none !important;
+    padding: 0 5px !important;
+    transition: color 0.3s ease !important;
+    display: inline-block !important;
+}
+
+/* Колір для активної мови та при наведенні мишкою */
+.lang-switcher a.active,
+.lang-switcher a:hover,
+.lang-switcher a.active:visited {
+    color: #ffffff !important; /* Активна мова завжди КРИСТАЛЬНО БІЛА */
+}
+
+.lang-switcher .lang-separator {
+    color: #555555 !important;
+}

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ремонт и дизайн под ключ</title>
@@ -16,26 +17,38 @@
 </head>
 <body>
 
-    <header class="site-header">
+<header class="site-header">
     <div class="logo">
-        <img src="logo.png" alt="">
+        <a href="index.html">
+            <img src="logo.png" alt="Stroykartel Logo">
+        </a>
     </div>
 
-    <button class="burger-menu-btn" aria-label="Открыть меню">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
-
     <nav class="main-nav">
-        <a href="#process">Процесс <i class="fa-solid fa-chevron-down"></i></a>
-        <a href="#portfolio">Портфолио</a>
-        <a href="#contacts">Контакти</a>
+        <a href="index.html">Главная</a>
+
+        <div class="dropdown">
+            <a href="#" class="dropdown-toggle">Процесс <i class="fa-solid fa-chevron-down"></i></a>
+            <ul class="dropdown-menu">
+                <li><a href="design.html">Дизайн</a></li>
+                <li><a href="engineering.html">Инженерные systems</a></li>
+                <li><a href="remont.html">Ремонт</a></li>
+            </ul>
+        </div>
+        <a href="index.html#portfolio">Портфолио</a>
+        <a href="#contacts">Контакты</a>
     </nav>
-    <div class="lang-switcher">
-        <a href="/ro/" class="lang-link">RO</a>
-        <span class="lang-separator">|</span>
-        <a href="/ru/" class="lang-link active">RU</a>
+
+    <div class="header-right" style="display: flex; align-items: center; gap: 20px;">
+        <div class="lang-switcher">
+            <a href="#" class="lang-link active">RU</a>
+            <span class="lang-separator">/</span>
+            <a href="#" class="lang-link">RO</a>
+        </div>
+
+        <button class="burger-menu-btn">
+            <span></span><span></span><span></span>
+        </button>
     </div>
 </header>
 
@@ -46,7 +59,7 @@
     <img src="2.png" alt="Ремонт" class="bg-photo remont-bg">
     <img src="4.png" alt="Инженерные системы" class="bg-photo engineering-bg">
     <!-- Для дизайна используем картинку 1.png в качестве полноэкранного фона при наведении -->
-    <img src="1.png" alt="Дизайн" class="bg-photo design-bg">
+    <img src="5.png" alt="Дизайн" class="bg-photo design-bg">
 
     <!-- ТЕМНЫЙ ФИЛЬТР ДЛЯ ЧИТАЕМОСТИ ТЕКСТА -->
     <div class="hero-overlay"></div>
@@ -135,7 +148,11 @@
             </div>
         </div>
     </div>
-<div class="contacts-grid">
+<section class="contacts-section" id="contacts">
+    <div class="contacts-container">
+        <h2>Контакты</h2>
+
+        <div class="contacts-grid">
             <div class="contact-card">
                 <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
                 <div class="contact-content">
@@ -173,13 +190,8 @@
                 </div>
             </div>
         </div>
-
-        <div class="cta-button-wrapper">
-            <button class="cta-button">СВЯЗАТЬСЯ С НАМИ</button>
-        </div>
-    </div>
-
-    <div class="map-wrapper">
+        
+    </div> <div class="map-wrapper">
         <div id="map"></div>
     </div>
 </section>

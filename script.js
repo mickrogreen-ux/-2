@@ -244,7 +244,63 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+document.addEventListener("DOMContentLoaded", function () {
+    const forms = document.querySelectorAll(".calc-form");
 
+    forms.forEach(form => {
+        form.addEventListener("submit", function (event) {
+            event.preventDefault(); // Забороняємо перезавантаження сторінки
+
+            const button = form.querySelector(".btn-submit");
+            const messageDiv = form.querySelector(".form-message");
+            
+            // Захист кнопки під час відправки
+            button.disabled = true;
+            button.innerText = "ОТПРАВКА...";
+            messageDiv.style.display = "none";
+
+            const formData = new FormData(form);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+
+            // Надсилаємо дані за допомогою API сервісу Web3Forms
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
+            })
+            .then(async (response) => {
+                let res = await response.json();
+                if (response.status == 200) {
+                    // Успішно надіслано
+                    messageDiv.style.display = "block";
+                    messageDiv.style.color = "#d4af37"; // Фірмовий золотий колір тексту
+                    messageDiv.innerText = "Спасибо! Заявка успешно отправлена, мы скоро свяжемся с вами.";
+                    form.reset(); // Очищаємо всі поля форми
+                } else {
+                    // Серверна помилка
+                    messageDiv.style.display = "block";
+                    messageDiv.style.color = "#ff4d4d";
+                    messageDiv.innerText = res.message || "Ошибка сервера. Попробуйте позже.";
+                }
+            })
+            .catch(error => {
+                // Проблеми з мережею/інтернетом
+                messageDiv.style.display = "block";
+                messageDiv.style.color = "#ff4d4d";
+                messageDiv.innerText = "Ошибка сети. Проверьте интернет-соединение.";
+            })
+            .then(() => {
+                // Повертаємо кнопку в початковий стан
+                button.disabled = false;
+                button.innerText = "ОТПРАВИТЬ";
+            });
+        });
+    });
+});
 
 
 
