@@ -346,7 +346,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: transparent; /* Було rgba(0, 0, 0, 0.5) */
     z-index: 2;
 }
 
@@ -627,6 +627,127 @@ body {
         height: 380px;
     }
 }
+/* ==========================================================================
+   СЕКЦИЯ ПРЕИМУЩЕСТВ (ADVANTAGES)
+   ========================================================================== */
+.advantages-section {
+    background-color: #ffffff; /* Чистый белый фон */
+    padding: 100px 4% 60px 4%; /* Большие элегантные отступы сверху */
+    width: 100%;
+}
+
+.advantages-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Главный заголовок секции */
+.advantages-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 32px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #111111;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+/* Подзаголовок */
+.advantages-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #666666;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+/* Сетка на 4 колонки */
+.advantages-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+
+/* Карточка преимущества */
+.advantage-card {
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.05); /* Едва заметная тонкая рамка */
+    padding: 40px 30px;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Легкий ховер-эффект: плавно появляется мягкая тень и золотой акцент */
+.advantage-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(212, 175, 55, 0.3); /* Тонкий намек на золото */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.04);
+}
+
+/* Стиль иконки */
+.advantage-icon {
+    font-size: 28px;
+    color: #111111; /* Строгий темный цвет */
+    margin-bottom: 20px;
+    transition: color 0.3s ease;
+}
+
+.advantage-card:hover .advantage-icon {
+    color: #d4af37; /* Иконка золотеет при наведении */
+}
+
+/* Название преимущества */
+.advantage-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #111111;
+    margin-bottom: 12px;
+}
+
+/* Описание преимущества */
+.advantage-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: #666666; /* Спокойный серый цвет для легкого чтения */
+    margin: 0;
+}
+
+/* ==========================================================================
+   АДАПТИВНОСТЬ (МОБИЛЬНАЯ ВЕРСИЯ)
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .advantages-grid {
+        grid-template-columns: repeat(2, 1fr); /* На планшетах плитка 2х2 */
+    }
+}
+
+@media (max-width: 600px) {
+    .advantages-section {
+        padding: 70px 4% 40px 4%;
+    }
+    
+    .advantages-grid {
+        grid-template-columns: 1fr; /* На телефонах все в одну колонку */
+        gap: 20px;
+    }
+    
+    .advantages-title {
+        font-size: 26px;
+    }
+    
+    .advantage-card {
+        padding: 30px 20px;
+    }
+}
 
 /* ==========================================================================
    5. СЕКЦИЯ КОНТАКТОВ И КАРТЫ
@@ -636,26 +757,37 @@ body {
     background-color: #ffffff; /* Белый фон */
     color: #000000;            /* Черный текст */
 }
-
 .contacts-container {
     max-width: 1200px;
     margin: 0 auto;
+    /* ДОДАЛИ: центрування всього вмісту всередині контейнера */
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    padding: 0 4%;
 }
 
 .contacts-container h2 {
+    font-family: 'Montserrat', sans-serif; /* Додали фірмовий шрифт */
     font-size: 32px;
-    font-weight: 700;
+    font-weight: 500; /* Зробили трохи акуратнішим (500 замість 700) */
     color: #111111;
-    margin-bottom: 40px;
-    text-transform: none;
+    margin-bottom: 50px; /* Трохи збільшили відступ */
+    text-transform: uppercase; /* Зробили великими літерами для преміальності */
+    letter-spacing: 2px;
+    text-align: center; /* Текст заголовка чітко по центру */
 }
 
 /* Сетка контактов */
 .contacts-grid {
     display: flex;
-    justify-content: space-between;
-    gap: 30px;
-    margin-bottom: 40px;
+    /* ЗМІНИЛИ: тепер картки стають по центру з гарними відступами */
+    justify-content: center; 
+    gap: 50px; /* Збільшили проміжок між картками, щоб вони розійшлися по ширині */
+    width: 100%;
+    max-width: 1100px;
+    margin-bottom: 50px;
+    flex-wrap: wrap; /* Щоб на маленьких екранах картки акуратно переносилися */
 }
 
 /* Карточка контакта */
@@ -663,13 +795,15 @@ body {
     display: flex;
     align-items: flex-start;
     gap: 12px;
+    /* ДОДАЛИ: мінімальна ширина, щоб блоки виглядали рівномірно */
+    min-width: 200px; 
 }
 
 /* Иконки FontAwesome */
 .contact-icon {
     font-size: 16px;
-    color: #f59e0b; /* Оранжево-желтый акцент */
-    margin-top: 3px;
+    color: #f59e0b; /* Твій оранжево-жовтий акцент */
+    margin-top: 2px; /* Мікро-вирівнювання іконки по висоті першого рядка */
 }
 
 .contact-content {
@@ -679,16 +813,20 @@ body {
 }
 
 .contact-content .label {
-    font-size: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px; /* Трохи зменшили для акуратності */
     color: #888888;
+    letter-spacing: 0.5px;
 }
 
 .contact-content .value {
+    font-family: 'Montserrat', sans-serif;
     font-size: 14px;
     color: #000000;
     text-decoration: none;
     font-weight: 500;
     line-height: 1.4;
+    white-space: nowrap; /* Щоб адреса чи довга пошта не ламалися як попало */
 }
 
 .contact-content a.value:hover {
@@ -783,6 +921,173 @@ body {
         gap: 20px;
     }
 }
+/* ==========================================================================
+   КНОПКА ВЫЗОВА ФОРМЫ (СТРАНИЦА КОНТАКТОВ)
+   ========================================================================== */
+.contacts-cta-box {
+    margin-top: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-consult-trigger {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    padding: 16px 40px;
+    background-color: transparent;
+    color: #111111; /* Темный текст для светлого фона */
+    border: 1px solid rgba(0, 0, 0, 0.2); /* Аккуратная тонкая рамка */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.btn-consult-trigger:hover {
+    background-color: #111111;
+    color: #ffffff;
+    border-color: #111111;
+}
+
+/* ==========================================================================
+   МОДАЛЬНОЕ ОКНО (СВЕТЛЫЙ МИНИМАЛИЗМ)
+   ========================================================================== */
+/* Задний фон-завеса */
+.consult-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.4); /* Светлая полупрозрачная вуаль */
+    backdrop-filter: blur(10px); /* Красивое матовое размытие сайта на фоне */
+    z-index: 9999; /* Поверх всего контента */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+/* Класс, который добавляется через JS при клике */
+.consult-modal-overlay.is-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Само аккуратное белое окошко */
+.consult-modal-window {
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.06); /* Едва заметный контур */
+    padding: 45px 40px;
+    width: 90%;
+    max-width: 420px;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06); /* Мягкая, дорогая тень */
+    transform: translateY(-15px);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.consult-modal-overlay.is-open .consult-modal-window {
+    transform: translateY(0);
+}
+
+/* Кнопка-крестик (закрыть) */
+.modal-close-x {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    color: rgba(0, 0, 0, 0.3);
+    font-size: 26px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    line-height: 1;
+}
+
+.modal-close-x:hover {
+    color: #d4af37; /* Золотой акцент при наведении */
+}
+
+/* Заголовки внутри модалки */
+.modal-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #111111;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.modal-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    color: #666666;
+    text-align: center;
+    margin-bottom: 35px;
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   ВЕРТИКАЛЬНАЯ ФОРМА (ПОЛЯ ОДНО ПОД ОДНИМ)
+   ========================================================================== */
+.modal-vertical-form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* Просторные чистые отступы */
+    background: transparent !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+}
+
+/* Инпуты тонкими линиями */
+.modal-vertical-form input[type="text"],
+.modal-vertical-form input[type="tel"] {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15); /* Тонкая полоска снизу */
+    border-radius: 0;
+    padding: 8px 0;
+    color: #111111;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.modal-vertical-form input:focus {
+    outline: none;
+    border-bottom: 1px solid #d4af37; /* Золотеет при клике */
+}
+
+/* Кнопка отправки */
+.modal-vertical-form .btn-submit {
+    margin-top: 10px;
+    height: 50px;
+    background-color: #111111; /* Строгая темная кнопка */
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal-vertical-form .btn-submit:hover {
+    background-color: #d4af37; /* Становится золотой */
+    color: #ffffff;
+}
+
 /* ==========================================================================
    ФІКС ДЛЯ ПОСИЛАНЬ МОВ (ПРИМУСОВО ПРИБИРАЄ ФІОЛЕТОВИЙ КОЛІР)
    ========================================================================== */

@@ -1,6 +1,7 @@
 /* --- 1. БАЗОВІ СКИДАННЯ ТА ШРИФТИ --- */
 html {
     scroll-behavior: smooth !important;
+    overflow-x: hidden !important;
 }
 * {
     box-sizing: border-box;
@@ -15,6 +16,7 @@ body {
     display: flex;
     flex-direction: column; /* Змушує секції йти строго одна під одну (поверхами) */
     align-items: center;    /* Центрує обидві секції по ширині екрану */
+    overflow-x: hidden;
 }
 
 /* ==========================================================================
@@ -501,6 +503,8 @@ body {
     padding: 80px 4% 0 4%;
     background-color: #ffffff;
     color: #000000;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .contacts-container {
@@ -515,6 +519,8 @@ body {
     margin-bottom: 50px;
     text-transform: uppercase;
     letter-spacing: 1px;
+    text-align: center;
+    width: 100%;
 }
 
 /* Сетка выстраивает 4 колонки строго в один ряд */
@@ -615,55 +621,67 @@ body {
     color: #ffffff;
 }
 
-/* БЛОК КАРТЫ */
-.map-wrapper {
+/* Карта на всю ширину экрана */
+.map-wrapper,
+.map-section {
     position: relative;
-    width: auto;
-    margin-left: -4.2%; 
-    margin-right: -4.2%;
+    width: 100vw;
+    max-width: 100vw;
     height: 500px;
+    min-height: 420px;
+    margin: 40px calc(50% - 50vw) 0;
+    padding: 0;
     overflow: hidden;
-    margin-top: 40px;
+    align-self: center;
+    flex-shrink: 0;
 }
 
-#map {
+#map,
+.map-wrapper #map,
+.map-section #map,
+.map-wrapper .leaflet-container,
+.map-section .leaflet-container {
     width: 100%;
     height: 100%;
+    min-height: 100%;
 }
 
-.map-wrapper::before {
+.map-wrapper::before,
+.map-section::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 80px;
+    height: 90px;
     background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
     z-index: 1000;
     pointer-events: none;
 }
 
-.custom-marker {
-    background: #d4af37 !important;
-    border: 3px solid #ffffff !important;
-    border-radius: 50% !important;
-    box-shadow: 0 0 15px rgba(212, 175, 55, 0.7) !important;
-}
+@media (max-width: 768px) {
+    .map-wrapper,
+    .map-section {
+        height: 420px;
+        min-height: 360px;
+        margin-top: 32px;
+    }
 
-/* Адаптивность для мобильных экранов */
-@media (max-width: 992px) {
-    .contacts-grid {
-        grid-template-columns: repeat(2, 1fr); /* На планшетах 2х2 */
-        gap: 40px;
+    .map-wrapper::before,
+    .map-section::before {
+        height: 65px;
     }
 }
 
-@media (max-width: 576px) {
-    .contacts-grid {
-        grid-template-columns: 1fr; /* На мобильных строго в один вертикальный ряд */
-        gap: 30px;
+@media (max-width: 480px) {
+    .map-wrapper,
+    .map-section {
+        height: 360px;
+        min-height: 320px;
+        margin-top: 24px;
     }
 }
+
 /* ==========================================================================
    УНІВЕРСАЛЬНИЙ ФІКС МОВ (ПРАЦЮЄ НАВІТЬ БЕЗ КЛАСІВ ТА ПРИБИРАЄ ФІОЛЕТОВИЙ)
    ========================================================================== */
@@ -686,4 +704,137 @@ body {
 
 .lang-switcher .lang-separator {
     color: #555555 !important;
+}
+
+/* Фикс переключателя языков: без стандартного фиолетового visited */
+.lang-switcher a,
+.lang-switcher a:link,
+.lang-switcher a:visited,
+.lang-switcher .lang-link,
+.lang-switcher .lang-link:link,
+.lang-switcher .lang-link:visited {
+    color: #aaaaaa !important;
+    text-decoration: none !important;
+}
+
+.lang-switcher a.active,
+.lang-switcher a.active:link,
+.lang-switcher a.active:visited,
+.lang-switcher a:hover,
+.lang-switcher .lang-link.active,
+.lang-switcher .lang-link.active:link,
+.lang-switcher .lang-link.active:visited,
+.lang-switcher .lang-link:hover {
+    color: #ffffff !important;
+}
+
+
+/* Кнопка консультации и модальное окно */
+.contacts-cta-box {
+    margin: 40px 0 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-consult-trigger {
+    min-width: 320px;
+    min-height: 54px;
+    padding: 0 34px;
+    background: transparent;
+    border: 1px solid #cfcfcf;
+    color: #111111;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+}
+
+.btn-consult-trigger:hover {
+    border-color: #d4af37;
+    color: #d4af37;
+}
+
+.consult-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(0, 0, 0, 0.62);
+}
+
+.consult-modal-overlay.active {
+    display: flex;
+}
+
+.consult-modal-window {
+    position: relative;
+    width: min(460px, 100%);
+    padding: 42px 34px 34px;
+    background: #ffffff;
+    color: #111111;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.22);
+}
+
+.modal-close-x {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    border: 0;
+    background: transparent;
+    color: #111111;
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.modal-title {
+    margin: 0 0 12px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.modal-subtitle {
+    margin: 0 0 28px;
+    text-align: center;
+    color: #666666;
+    line-height: 1.5;
+}
+
+.modal-vertical-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+@media (max-width: 480px) {
+    .btn-consult-trigger {
+        min-width: 0;
+        width: 100%;
+        letter-spacing: 2px;
+    }
+
+    .consult-modal-window {
+        padding: 38px 22px 28px;
+    }
+}
+
+/* Підписи під фото приховані, але залишають стару висоту карток */
+.work-info {
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+.work-info h3,
+.work-meta,
+.meta-item {
+    visibility: hidden !important;
 }

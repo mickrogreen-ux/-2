@@ -64,3 +64,31 @@ var yellowCircleIcon = L.divIcon({
 });
 
 L.marker([47.0245, 28.8322], { icon: yellowCircleIcon }).addTo(map);
+
+// Консультационная модалка
+(function () {
+    const modal = document.getElementById('consultModal');
+    const openBtn = document.getElementById('openConsultBtn');
+    const closeBtn = document.getElementById('closeConsultBtn');
+
+    if (!modal || !openBtn || !closeBtn) return;
+
+    const openModal = () => {
+        modal.classList.add('active');
+        document.body.classList.add('no-scroll');
+    };
+
+    const closeModal = () => {
+        modal.classList.remove('active');
+        document.body.classList.remove('no-scroll');
+    };
+
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (event) => {
+        if (event.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && modal.classList.contains('active')) closeModal();
+    });
+})();

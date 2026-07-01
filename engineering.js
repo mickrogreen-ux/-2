@@ -64,3 +64,40 @@ var yellowCircleIcon = L.divIcon({
 });
 
 L.marker([47.0245, 28.8322], { icon: yellowCircleIcon }).addTo(map);
+    // ==========================================
+    // ЛОГІКА ДЛЯ МОДАЛЬНОГО ВІКНА КОНСУЛЬТАЦІЇ
+    // ==========================================
+    const modal = document.getElementById("consultModal");
+    const openBtn = document.getElementById("openConsultBtn");
+    const closeBtn = document.getElementById("closeConsultBtn");
+
+    // Перевіряємо в консолі, чи знайшов JS наші елементи (для тесту)
+    console.log("Елементи модалки:", { openBtn, modal, closeBtn });
+
+    // Відкрити вікно при кліку на кнопку "ЗАКАЗАТЬ КОНСУЛЬТАЦИЮ"
+    if (openBtn && modal) {
+        openBtn.addEventListener("click", function (e) {
+            e.preventDefault(); // про всяк випадок блокуємо стандартну поведінку
+            modal.classList.add("is-open");
+            document.body.style.overflow = "hidden"; // блокуємо прокрутку сайту на фоні
+        });
+    }
+
+    // Закрити вікно при кліку на хрестик
+    if (closeBtn && modal) {
+        closeBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            modal.classList.remove("is-open");
+            document.body.style.overflow = ""; // повертаємо прокрутку сайту
+        });
+    }
+
+    // Закрити вікно, якщо клікнули на світле тло поза формою
+    if (modal) {
+        modal.addEventListener("click", function (event) {
+            if (event.target === modal) {
+                modal.classList.remove("is-open");
+                document.body.style.overflow = "";
+            }
+        });
+    }
